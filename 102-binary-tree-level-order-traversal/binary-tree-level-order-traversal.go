@@ -1,11 +1,8 @@
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+type Collection interface {
+	Len() int
+	IsEmpty() bool
+}
+
 type Queue[T any] struct {
 	q []T
 }
@@ -32,12 +29,28 @@ func (q *Queue[T]) Deque() T {
 	return v
 }
 
-func (q *Queue[T]) Len() int {
+func (q Queue[T]) Len() int {
 	return len(q.q)
 }
 
-func (q *Queue[T]) IsEmpty() bool {
+func (q Queue[T]) IsEmpty() bool {
 	return q.Len() == 0
+}
+
+type Iter[T Collection] struct {
+	v T
+}
+
+func (q *Queue[T]) Iter() Iter[*Queue[T]] {
+	return Iter[*Queue[T]]{
+		v: q,
+	}
+}
+
+func (q Iter[T]) ForEach(fn func()) {
+	for !q.v.IsEmpty() {
+		fn()
+	}
 }
 
 func levelOrder(root *TreeNode) [][]int {
@@ -51,7 +64,7 @@ func BFS(node *TreeNode, res *[][]int) {
 
 	queue.Enqueue(node)
 
-	for !queue.IsEmpty() {
+	queue.Iter().ForEach(func() {
 		level := make([]int, 0)
 
 		for range queue.Len() {
@@ -67,5 +80,5 @@ func BFS(node *TreeNode, res *[][]int) {
 		if len(level) != 0 {
 			*res = append(*res, level)
 		}
-	}
+	})
 }
