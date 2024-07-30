@@ -34,33 +34,6 @@ func (t *Trie) Insert(word string) {
 	node.isEnd = true
 }
 
-func (t *Trie) Search(word string) bool {
-	node := t.root
-
-	for _, char := range word {
-		ch := byte(char)
-		if _, ok := node.children[ch]; !ok {
-			return false
-		}
-
-		node = node.children[ch]
-	}
-
-	return node.isEnd
-}
-
-func (t *Trie) StartsWith(prefix string) bool {
-	node := t.root
-	for _, char := range prefix {
-		ch := byte(char)
-		if _, ok := node.children[ch]; !ok {
-			return false
-		}
-		node = node.children[ch]
-	}
-	return true
-}
-
 func findWords(board [][]byte, words []string) []string {
 	trie := NewTrie()
 
