@@ -24,5 +24,5 @@ func hasCycle(head *ListNode) bool {
 		curr = curr.Next
 	}
 
-	return false    
+	return false
 }
