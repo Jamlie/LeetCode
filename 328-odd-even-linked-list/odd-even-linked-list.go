@@ -20,31 +20,15 @@ func oddEvenList(head *ListNode) *ListNode {
 	evenCurr = head.Next
 	firstEven := evenCurr
 
-	counter := 1
+	for evenCurr != nil && evenCurr.Next != nil {
+		oddCurr.Next = evenCurr.Next
+		oddCurr = oddCurr.Next
 
-	for oddCurr != nil && evenCurr != nil {
-		if counter%2 == 1 {
-			if oddCurr.Next != nil {
-				oddCurr.Next = oddCurr.Next.Next
-			}
-			oddCurr = oddCurr.Next
-		} else {
-			if evenCurr.Next != nil {
-				evenCurr.Next = evenCurr.Next.Next
-			}
-			evenCurr = evenCurr.Next
-		}
-
-		counter++
+		evenCurr.Next = oddCurr.Next
+		evenCurr = evenCurr.Next
 	}
 
-	oddCurrent := head
-
-	for oddCurrent.Next != nil {
-		oddCurrent = oddCurrent.Next
-	}
-
-	oddCurrent.Next = firstEven
+	oddCurr.Next = firstEven
 
 	return head
 }
