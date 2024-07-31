@@ -11,13 +11,12 @@ func oddEvenList(head *ListNode) *ListNode {
 	}
 
 	oddCurr := head
-	var evenCurr *ListNode
 
 	if head.Next == nil {
 		return oddCurr
 	}
 
-	evenCurr = head.Next
+	evenCurr := head.Next
 	firstEven := evenCurr
 
 	for evenCurr != nil && evenCurr.Next != nil {
