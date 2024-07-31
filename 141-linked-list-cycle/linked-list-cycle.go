@@ -6,22 +6,19 @@
  * }
  */
 func hasCycle(head *ListNode) bool {
-	if head == nil {
-		return false
+    if head == nil {
+	    return false
 	}
 
-	nodes := make(map[uintptr]bool)
-	curr := head
+	slow, fast := head, head
 
-	for curr != nil {
-		ptr := uintptr(unsafe.Pointer(curr))
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
 
-		if nodes[ptr] {
+		if slow == fast {
 			return true
 		}
-
-		nodes[ptr] = true
-		curr = curr.Next
 	}
 
 	return false
