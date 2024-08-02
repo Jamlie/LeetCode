@@ -63,13 +63,12 @@ func (mf *MedianFinder) AddNum(num int) {
 }
 
 func (mf *MedianFinder) FindMedian() float64 {
-	if (mf.smallValues.Len()+mf.largeValues.Len())%2 == 1 {
-		if mf.largeValues.Len() > mf.smallValues.Len() {
-			median := mf.largeValues.Peek()
-			return float64(median)
-		}
-		median := mf.smallValues.Peek()
-		return float64(median)
+	if mf.smallValues.Len() > mf.largeValues.Len() {
+		return float64(mf.smallValues.Peek())
+	}
+
+	if mf.largeValues.Len() > mf.smallValues.Len() {
+		return float64(mf.largeValues.Peek())
 	}
 
 	minValue := mf.smallValues.Peek()
