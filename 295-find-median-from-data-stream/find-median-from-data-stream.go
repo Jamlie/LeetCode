@@ -40,10 +40,10 @@ type MedianFinder struct {
 func Constructor() MedianFinder {
 	return MedianFinder{
 		smallValues: NewHeap(func(i1, i2 int) bool {
-			return i1 < i2
+			return i1 > i2
 		}),
 		largeValues: NewHeap(func(i1, i2 int) bool {
-			return i1 > i2
+			return i1 < i2
 		}),
 	}
 }
