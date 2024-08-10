@@ -22,5 +22,5 @@ func findCombinations(nums []int, target int, memo map[int]int) int {
 
     memo[target] = result
 
-	return result
+	return memo[target]
 }
