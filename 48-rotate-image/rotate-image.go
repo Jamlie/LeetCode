@@ -5,9 +5,7 @@ func rotate(matrix [][]int) {
 		for j := i + 1; j < n; j++ {
 			matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 		}
-	}
 
-	for i := range n {
-		slices.Reverse(matrix[i])
+        slices.Reverse(matrix[i])
 	}
 }
