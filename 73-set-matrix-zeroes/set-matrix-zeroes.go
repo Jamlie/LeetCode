@@ -1,4 +1,4 @@
-type Coordinates struct {
+type Coordinate struct {
 	row int
 	col int
 }
@@ -8,14 +8,14 @@ func setZeroes(matrix [][]int) {
 		return
 	}
 
-	zeroesLocations := []Coordinates{}
+	zeroesLocations := []Coordinate{}
 	n := len(matrix)
 	m := len(matrix[0])
 
 	for i := range n {
 		for j := range m {
 			if matrix[i][j] == 0 {
-				zeroesLocations = append(zeroesLocations, Coordinates{
+				zeroesLocations = append(zeroesLocations, Coordinate{
 					row: i,
 					col: j,
 				})
