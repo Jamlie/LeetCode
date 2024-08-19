@@ -30,7 +30,7 @@ func imageSmoother(img [][]int) [][]int {
 				ni, nj := i+directionI, j+directionJ
 				if 0 <= ni && ni < m && 0 <= nj && nj < n {
 					total += img[ni][nj]
-					count += 1
+					count++
 				}
                 if count != 0 {
 				    result[i][j] = total / count
