@@ -22,7 +22,10 @@ func Constructor() Codec {
 
 // Encodes a URL to a shortened URL.
 func (c *Codec) encode(longUrl string) string {
-	endpointLength := 6
+	const (
+		urlBase        = "http://tinyurl.com/"
+		endpointLength = 6
+	)
 
 	endpoint := generateRandomString(endpointLength)
 
@@ -34,12 +37,12 @@ func (c *Codec) encode(longUrl string) string {
 		}
 	}
 
-	var (
-		urlBase = "http://tinyurl.com/"
-		newUrl  = strings.Builder{}
-	)
+	newUrl := strings.Builder{}
 
 	newUrl.Grow(len(urlBase) + len(endpoint))
+
+	newUrl.WriteString(urlBase)
+	newUrl.WriteString(endpoint)
 
 	c.urls[newUrl.String()] = longUrl
 
@@ -53,11 +56,3 @@ func (c *Codec) decode(shortUrl string) string {
 	}
 	return ""
 }
-
-
-/**
- * Your Codec object will be instantiated and called as such:
- * obj := Constructor();
- * url := obj.encode(longUrl);
- * ans := obj.decode(url);
- */
